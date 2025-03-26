@@ -43,9 +43,6 @@ If the primary link goes down, the floating static route activates automatically
 ✅ Redundancy & Failover – Ensuring backup connectivity in case of link failure.
 ✅ Route Verification & Debugging – Using commands like:
 
-sh
-Copy
-Edit
 show ip route  
 show ip interface brief  
 debug ip routing  
@@ -71,23 +68,15 @@ PC3	e0	192.168.20.10/24
 PC4	e0	192.168.20.20/24
 🔧 Configuration Steps
 1️⃣ Configure Primary Static Route (on R1)
-sh
-Copy
-Edit
 ip route 192.168.20.0 255.255.255.0 192.168.100.2 1
 This sets the primary route with an administrative distance of 1.
 
 2️⃣ Configure Floating Static Route (on R1)
-sh
-Copy
-Edit
 ip route 192.168.20.0 255.255.255.0 192.168.102.2 10
 This sets a backup route with an administrative distance of 10. It will activate only if the primary route fails.
 
 3️⃣ Verify Route Selection
 sh
-Copy
-Edit
 show ip route
 Before failure: The primary route is active.
 
@@ -96,25 +85,16 @@ After failure: The backup route takes over automatically.
 🎯 Testing & Verification
 1️⃣ Check active routes
 
-sh
-Copy
-Edit
 show ip route
 ✅ Primary route should be active.
 
 2️⃣ Simulate Link Failure
 
-sh
-Copy
-Edit
 shutdown interface f0/0
 ✅ Floating static route should take over.
 
 3️⃣ Check Failover Activation
 
-sh
-Copy
-Edit
 show ip route
 ✅ Backup route should now be active.
 
